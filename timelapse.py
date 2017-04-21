@@ -104,7 +104,7 @@ def main():
                     time.sleep((MIN_INTER_SHOT_DELAY_SECONDS - (last_acquired - last_started)).seconds)
             shot = shot + 1
     except Exception,e:
-        prin str(e)
+        print str(e)
 
 if __name__ == "__main__":
     main()
