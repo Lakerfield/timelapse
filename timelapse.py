@@ -6,6 +6,7 @@ import subprocess
 import time
 
 from wrappers import GPhoto
+from wrappers import Identify
 
 #sudo /usr/local/bin/gphoto2 --capture-image-and-download --filename 'test3.jpg'
 #curl --form "fileupload=@test7.jpg" http://192.168.178.197:5000/
