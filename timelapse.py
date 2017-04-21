@@ -73,8 +73,11 @@ def main():
             last_started = datetime.now()
             config = CONFIGS[current_config]
             print "Shot: %d Shutter: %s ISO: %d" % (shot, config[0], config[1])
+            print "Set shutter " + config[0]
             camera.set_shutter_speed(secs=config[0])
+            print "Set iso " + str(config[1])
             camera.set_iso(iso=str(config[1]))
+            print "Taking picture"
             try:
               filename = camera.capture_image_and_download()
             except Exception, e:
