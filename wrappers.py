@@ -37,6 +37,17 @@ class Identify(Wrapper):
         code, out, err = self.call(self._CMD + ' -format "%[mean]" ' + filepath)
         return out
 
+class Curl(Wrapper):
+    """ A class which wraps calls to the external curl process. """
+
+    def __init__(self, subprocess):
+        Wrapper.__init__(self, subprocess)
+        self._CMD = 'curl'
+
+    def fileupload(self, filename, url):
+        code, out, err = self.call(self._CMD + ' --form "fileupload=@' + filename + '" ' + url)
+        return out
+
 class GPhoto(Wrapper):
     """ A class which wraps calls to the external gphoto2 process. """
 
@@ -59,7 +70,7 @@ class GPhoto(Wrapper):
 
 
     def capture_image_and_download(self, shot=None, image_directory=None):
-        code, out, err = self.call(self._CMD + " --capture-image-and-download --filename '%Y%m%d%H%M%S.JPG'")
+        code, out, err = self.call(self._CMD + " --capture-image-and-download --filename '%Y%m%d-%H%M%S.jpg'")
         filename = None
         print out
         for line in out.split('\n'):

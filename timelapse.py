@@ -7,6 +7,7 @@ import time
 
 from wrappers import GPhoto
 from wrappers import Identify
+from wrappers import Curl
 
 #sudo /usr/local/bin/gphoto2 --capture-image-and-download --filename 'test3.jpg'
 #curl --form "fileupload=@test7.jpg" http://192.168.178.197:5000/
@@ -14,6 +15,7 @@ from wrappers import Identify
 MIN_INTER_SHOT_DELAY_SECONDS = timedelta(seconds=30)
 MIN_BRIGHTNESS = 20000
 MAX_BRIGHTNESS = 30000
+UPLOAD_URL = "http://192.168.178.197:5000/"
 
 CONFIGS = [("1/1600", 200),
            ("1/1000", 200),
@@ -61,8 +63,9 @@ def main():
     print "Timelapse"
     camera = GPhoto(subprocess)
     idy = Identify(subprocess)
+    curl = Curl(subprocess)
     
-    current_config = 11
+    current_config = 25 #11
     shot = 0
     prev_acquired = None
     last_acquired = None
@@ -88,6 +91,8 @@ def main():
 
             print "-> %s %s" % (filename, brightness)
 
+            curl.fileupload(filename, UPLOAD_URL)
+
             if brightness < MIN_BRIGHTNESS and current_config < len(CONFIGS) - 1:
                 current_config = current_config + 1
             elif brightness > MAX_BRIGHTNESS and current_config > 0:
@@ -99,7 +104,7 @@ def main():
                     time.sleep((MIN_INTER_SHOT_DELAY_SECONDS - (last_acquired - last_started)).seconds)
             shot = shot + 1
     except Exception,e:
-        ui.show_error(str(e))
+        prin str(e)
 
 if __name__ == "__main__":
     main()
