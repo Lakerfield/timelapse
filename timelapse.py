@@ -86,11 +86,12 @@ def main():
               # Occasionally, capture can fail but retries will be successful.
               continue
             prev_acquired = last_acquired
+            print "calculating brightness"
             brightness = float(idy.mean_brightness(filename))
             last_acquired = datetime.now()
 
             print "-> %s %s" % (filename, brightness)
-
+            print "start uploading"
             curl.fileupload(filename, UPLOAD_URL)
 
             if brightness < MIN_BRIGHTNESS and current_config < len(CONFIGS) - 1:
