@@ -65,7 +65,7 @@ def main():
     idy = Identify(subprocess)
     curl = Curl(subprocess)
     
-    current_config = 11 #25 #11
+    current_config = 5 #25 #11
     shot = 0
     prev_acquired = None
     last_acquired = None
