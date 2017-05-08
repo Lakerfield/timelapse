@@ -12,7 +12,7 @@ from wrappers import Curl
 #sudo /usr/local/bin/gphoto2 --capture-image-and-download --filename 'test3.jpg'
 #curl --form "fileupload=@test7.jpg" http://192.168.178.197:5000/
 
-MIN_INTER_SHOT_DELAY_SECONDS = timedelta(seconds=30)
+MIN_INTER_SHOT_DELAY_SECONDS = timedelta(seconds=300)
 MIN_BRIGHTNESS = 20000
 MAX_BRIGHTNESS = 30000
 UPLOAD_URL = "http://192.168.178.197:5000/"
@@ -65,7 +65,7 @@ def main():
     idy = Identify(subprocess)
     curl = Curl(subprocess)
     
-    current_config = 25 #11
+    current_config = 11 #25 #11
     shot = 0
     prev_acquired = None
     last_acquired = None
@@ -75,7 +75,7 @@ def main():
         while True:
             last_started = datetime.now()
             config = CONFIGS[current_config]
-            print "Shot: %d Shutter: %s ISO: %d" % (shot, config[0], config[1])
+            print "Shot: %d Mode: %d Shutter: %s ISO: %d" % (shot, current_config, config[0], config[1])
             camera.set_shutter_speed(secs=config[0])
             camera.set_iso(iso=str(config[1]))
             try:
