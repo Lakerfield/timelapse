@@ -99,10 +99,10 @@ def main():
             #elif brightness > MAX_BRIGHTNESS and current_config > 0:
             #    current_config = current_config - 1
             #else:
-                if last_started and last_acquired and last_acquired - last_started < MIN_INTER_SHOT_DELAY_SECONDS:
-                    print "Sleeping for %s till %s" % (str(MIN_INTER_SHOT_DELAY_SECONDS - (last_acquired - last_started)), str(datetime.now() + MIN_INTER_SHOT_DELAY_SECONDS - (last_acquired - last_started)))
+            if last_started and last_acquired and last_acquired - last_started < MIN_INTER_SHOT_DELAY_SECONDS:
+                print "Sleeping for %s till %s" % (str(MIN_INTER_SHOT_DELAY_SECONDS - (last_acquired - last_started)), str(datetime.now() + MIN_INTER_SHOT_DELAY_SECONDS - (last_acquired - last_started)))
 
-                    time.sleep((MIN_INTER_SHOT_DELAY_SECONDS - (last_acquired - last_started)).seconds)
+                time.sleep((MIN_INTER_SHOT_DELAY_SECONDS - (last_acquired - last_started)).seconds)
             shot = shot + 1
     except Exception,e:
         print str(e)
