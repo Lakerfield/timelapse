@@ -90,7 +90,8 @@ def main():
             #brightness = float(idy.mean_brightness(filename))
             last_acquired = datetime.now()
 
-            print "-> %s %s" % (filename, brightness)
+            #print "-> %s %s" % (filename, brightness)
+            print "-> %s" % (filename)
             print "start uploading"
             curl.fileupload(filename, UPLOAD_URL)
 
