@@ -76,8 +76,8 @@ def main():
             last_started = datetime.now()
             config = CONFIGS[current_config]
             print "Shot: %d Mode: %d Shutter: %s ISO: %d" % (shot, current_config, config[0], config[1])
-            camera.set_shutter_speed(secs=config[0])
-            camera.set_iso(iso=str(config[1]))
+            #camera.set_shutter_speed(secs=config[0])
+            #camera.set_iso(iso=str(config[1]))
             try:
               filename = camera.capture_image_and_download()
             except Exception, e:
@@ -86,19 +86,19 @@ def main():
               # Occasionally, capture can fail but retries will be successful.
               continue
             prev_acquired = last_acquired
-            print "calculating brightness"
-            brightness = float(idy.mean_brightness(filename))
+            #print "calculating brightness"
+            #brightness = float(idy.mean_brightness(filename))
             last_acquired = datetime.now()
 
             print "-> %s %s" % (filename, brightness)
             print "start uploading"
             curl.fileupload(filename, UPLOAD_URL)
 
-            if brightness < MIN_BRIGHTNESS and current_config < len(CONFIGS) - 1:
-                current_config = current_config + 1
-            elif brightness > MAX_BRIGHTNESS and current_config > 0:
-                current_config = current_config - 1
-            else:
+            #if brightness < MIN_BRIGHTNESS and current_config < len(CONFIGS) - 1:
+            #    current_config = current_config + 1
+            #elif brightness > MAX_BRIGHTNESS and current_config > 0:
+            #    current_config = current_config - 1
+            #else:
                 if last_started and last_acquired and last_acquired - last_started < MIN_INTER_SHOT_DELAY_SECONDS:
                     print "Sleeping for %s till %s" % (str(MIN_INTER_SHOT_DELAY_SECONDS - (last_acquired - last_started)), str(datetime.now() + MIN_INTER_SHOT_DELAY_SECONDS - (last_acquired - last_started)))
 
