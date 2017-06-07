@@ -128,6 +128,18 @@ class GPhoto(Wrapper):
         if index:
             code, out, err = self.call([self._CMD + " --set-config /main/settings/iso=" + str(index)])
 
+    def get_datetime(self):
+        code, out, err = self.call([self._CMD + " --get-config /main/status/datetime"])
+        model = {} 
+        for line in out.split('\n'):
+            if line.startswith('Current:'):
+                model = line.split(' ')
+                model.pop(0)
+        return ' '.join(model) 
+
+    def sync_datetime(self):
+        code, out, err = self.call([self._CMD + " --get-config /main/actions/syncdatetime=1"])
+
     def get_model(self):
 	code, out, err = self.call([self._CMD + " --summary"])
         model = {} 
