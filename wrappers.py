@@ -138,7 +138,7 @@ class GPhoto(Wrapper):
         return ' '.join(model) 
 
     def sync_datetime(self):
-        code, out, err = self.call([self._CMD + " --get-config /main/actions/syncdatetime=1"])
+        code, out, err = self.call([self._CMD + " --set-config /main/actions/syncdatetime=1"])
 
     def get_model(self):
 	code, out, err = self.call([self._CMD + " --summary"])
